@@ -11,7 +11,6 @@ import os
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
-import pandas as pd
 import streamlit as st
 
 import agent
@@ -70,11 +69,8 @@ def status_label(status: str) -> str:
     return f"{icon} {label}"
 
 
-def commitments_dataframe(rows: list[dict]) -> pd.DataFrame:
-    if not rows:
-        return pd.DataFrame(
-            columns=["Status", "Team", "Title", "Owner", "Deadline", "Days left", "Last update"]
-        )
+def commitments_table(rows: list[dict]) -> list[dict]:
+    """Build a list-of-dicts ready for ``st.dataframe`` (no pandas needed)."""
     today = date.today()
     out = []
     for c in rows:
@@ -94,10 +90,9 @@ def commitments_dataframe(rows: list[dict]) -> pd.DataFrame:
                 "Deadline": c["deadline"],
                 "Days left": days_left,
                 "Last update": last_str,
-                "_id": c["id"],
             }
         )
-    return pd.DataFrame(out)
+    return out
 
 
 # ---------- Sidebar ----------
@@ -354,9 +349,8 @@ def render_dashboard_list() -> None:
     if not rows:
         st.info("No commitments match the current filter.")
     else:
-        df = commitments_dataframe(rows)
         st.dataframe(
-            df.drop(columns=["_id"]),
+            commitments_table(rows),
             hide_index=True,
             use_container_width=True,
         )
