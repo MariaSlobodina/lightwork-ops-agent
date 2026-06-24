@@ -38,9 +38,9 @@ MODEL = os.getenv("OPENAI_MODEL", "gpt-4o")
 
 
 def _system_prompt() -> str:
-    return f"""You are the LightWork Ops Agent. You help a Founder's Associate at \
-LightWork AI (a 20-30 person startup with Engineering, Product, Commercial and \
-Operations teams) keep track of every team's commitments and deadlines.
+    return f"""You are the Ops Agent. You help a Founder's Associate at a \
+20-30 person startup (with Engineering, Product, Commercial and Operations teams) \
+keep track of every team's commitments and deadlines.
 
 Today's date is {date.today().isoformat()}.
 
@@ -316,7 +316,7 @@ def generate_weekly_summary() -> str:
     }
 
     prompt = (
-        "You are writing the weekly ops summary for LightWork AI's co-founders. "
+        "You are writing the weekly ops summary for the co-founders. "
         "Use the JSON below — do not invent facts not present.\n\n"
         "Structure the summary as markdown with these sections:\n"
         "1. **Headline** — one sentence on the overall state of the business this week.\n"

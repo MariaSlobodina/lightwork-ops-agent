@@ -21,7 +21,7 @@ from seed import seed as seed_demo
 
 # ---------- Setup ----------
 st.set_page_config(
-    page_title="LightWork Ops Agent",
+    page_title="Ops Agent",
     page_icon="🛰️",
     layout="wide",
 )
@@ -97,7 +97,7 @@ def commitments_table(rows: list[dict]) -> list[dict]:
 
 # ---------- Sidebar ----------
 with st.sidebar:
-    st.title("🛰️ LightWork Ops")
+    st.title("🛰️ Ops")
     st.caption("Your operations co-pilot.")
     st.divider()
 
@@ -285,7 +285,7 @@ def render_dashboard_list() -> None:
     """The default Dashboard view: attention panel + by-team table + add form."""
     st.header("Team performance")
     st.caption(
-        "Everything LightWork has committed to. The agent flags anything that needs attention."
+        "Everything the company has committed to. The agent flags anything that needs attention."
     )
 
     # Needs attention panel
@@ -442,7 +442,7 @@ with tab_chat:
         with st.chat_message(m["role"]):
             st.markdown(m["content"])
 
-    user_input = st.chat_input("e.g. 'Engineering is shipping the Stripe integration by 14 May, owner Priya'")
+    user_input = st.chat_input("e.g. 'Engineering is shipping the Stripe integration by 14 May, owner Mikhail'")
     if user_input:
         st.session_state.chat_messages.append({"role": "user", "content": user_input})
         with st.chat_message("user"):
@@ -489,7 +489,7 @@ with tab_summary:
         st.download_button(
             "Download as markdown",
             data=st.session_state.weekly_summary,
-            file_name=f"lightwork-weekly-{date.today().isoformat()}.md",
+            file_name=f"ops-weekly-{date.today().isoformat()}.md",
             mime="text/markdown",
         )
     else:
